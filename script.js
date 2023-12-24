@@ -7,10 +7,28 @@ var times = 0;
 var score1 = 0;
 var score2 = 0;
 
+let rockButton = document.querySelector(".rock");
+let paperButton = document.querySelector(".paper");
+let scissorsButton = document.querySelector(".scissors");
+
+rockButton.addEventListener("click",function(){
+
+    
+    gameRound("Rock",getComputerChoice());
+});
+paperButton.addEventListener("click",function(){
+
+    
+    gameRound("Paper",getComputerChoice());
+});
+scissorsButton.addEventListener("click",function(){
+
+    
+    gameRound("Scissors",getComputerChoice());
+});
+
 function getUserInput(){
 
-    var userInput = prompt("Rock, Paper or Scissors?");
-    return userInput;
 }
 
 function getComputerChoice(){
@@ -23,52 +41,66 @@ function getComputerChoice(){
 }
 
 function gameRound (playerSelection,computerSelection){
+    
+        
+        
 
     if(playerSelection.toLowerCase() == computerSelection.toLowerCase()){
 
-        console.log("Tie!! You two are on the same brain wavelength!!");
+        document.querySelector("h3").innerHTML = ("Tie!! You two are on the same brain wavelength!!");
 
     }
 
     else if((playerSelection.toLowerCase() === "Rock".toLowerCase()) && ((computerSelection.toLowerCase() === "Scissors".toLowerCase()))){
 
-        console.log("You Win! rock beats scissor!!");
+        document.querySelector("h3").innerHTML = ("You Win! rock beats scissor!!");
+        
         score1++;
+        document.querySelector(".score1").innerHTML = score1;
     }
 
     else if((playerSelection.toLowerCase() === "Paper".toLowerCase()) && ((computerSelection.toLowerCase() === "Rock".toLowerCase()))){
 
-        console.log("You Win! paper beats rock");
+        document.querySelector("h3").innerHTML = ("You Win! paper beats rock");
         score1++;
+        document.querySelector(".score1").innerHTML = score1;
     }
 
     else if((playerSelection.toLowerCase() === "Scissors".toLowerCase()) && ((computerSelection.toLowerCase() === "Paper".toLowerCase()))){
 
-        console.log("You Win! scissor beats paper!!");
+        document.querySelector("h3").innerHTML = ("You Win! scissor beats paper!!");
         score1++;
+        document.querySelector(".score1").innerHTML = score1;
     }
 /////////////////////////////////
     else if((playerSelection.toLowerCase() === "Rock".toLowerCase()) && ((computerSelection.toLowerCase() === "Paper".toLowerCase()))){
 
-        console.log("You Lose paper beats rock!!");
+        document.querySelector("h3").innerHTML = ("You Lose paper beats rock!!");
         score2++;
+        document.querySelector(".score2").innerHTML = score2;
     }
 
     else if((playerSelection.toLowerCase() === "Paper".toLowerCase()) && ((computerSelection.toLowerCase() === "Scissors".toLowerCase()))){
 
-        console.log("You Lose scissor beats paper!!");
+        document.querySelector("h3").innerHTML = ("You Lose scissor beats paper!!");
         score2++;
+        document.querySelector(".score2").innerHTML = score2;
     }
 
     else if((playerSelection.toLowerCase() === "Scissors".toLowerCase()) && ((computerSelection.toLowerCase() === "Rock".toLowerCase()))){
 
-        console.log("You Lose rock beats scissor!!");
+        document.querySelector("h3").innerHTML = ("You Lose rock beats scissor!!");
         score2++;
+        document.querySelector(".score2").innerHTML = score2;
     }
     
+    if(score1 ==5  || score2 == 5){
 
+        announce();
+    }
 
 }
+
 function game(){
 
     
@@ -77,20 +109,32 @@ function game(){
 
 }
 
-while(times<5){
-
-    game();
-    times++;
-
-}
 
 console.log(getUserInput());
 console.log(getComputerChoice());
 
+function announce(){
 if(score1>score2){
 
-    console.log("User has Won!!");
+    document.querySelector("h3").innerHTML = ("User has Won!!");
+    let restart = document.querySelector(".score").innerHTML = "Restart?";
+    restart.addEventListener("click",function(){
+        game();
+    })
+}
+else if(score1<score2){
+    document.querySelector("h3").innerHTML = ("Computer has Won!!");
+    let restart = document.querySelector(".score").innerHTML = "Restart?";
+    restart.addEventListener("click",function(){
+        game();
+    })
 }
 else{
-    console.log("Computer has Won!!");
+    document.querySelector("h3").innerHTML = ("It's a tie!!");
+    let restart = document.querySelector(".score").innerHTML = "Restart?";
+    restart.addEventListener("click",function(){
+        game();
+    })
 }
+}
+
